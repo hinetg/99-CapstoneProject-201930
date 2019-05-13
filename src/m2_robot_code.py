@@ -33,31 +33,30 @@ class MyRobotDelegate(object):
 
     # TODO: Add methods here as needed.
 
-
     def spin_left(self, speed, distance):
         distance = distance * 4.572
-        left_motor = rosebot.Motor('B')
-        right_motor = rosebot.Motor('C')
-        left_motor.reset_position()
-        left_motor.turn_on(speed)
-        right_motor.turn_on(-1 * speed)
+        self.robot.drive_system.right_motor.turn_on()
+        self.robot.drive_system.left_motor.turn_on()
+        self.robot.drive_system.left_motor.reset_position()
+        self.robot.drive_system.go(speed, -1 * speed)
         while True:
-            if left_motor.get_position() >= distance:
+            if self.robot.drive_system.right_motor.get_position() >= distance:
                 break
-        left_motor.turn_off()
+        self.robot.drive_system.right_motor.turn_off()
+        self.robot.drive_system.left_motor.turn_off()
+
 
     def spin_right(self, speed, distance):
         distance = distance * 4.572
-        right_motor = rosebot.Motor('C')
-        left_motor = rosebot.Motor('B')
-        right_motor.reset_position()
-        right_motor.turn_on(speed)
-        left_motor.turn_on(-1 * speed)
+        self.robot.drive_system.right_motor.turn_on()
+        self.robot.drive_system.left_motor.turn_on()
+        self.robot.drive_system.right_motor.reset_position()
+        self.robot.drive_system.go(-1 * speed, speed)
         while True:
-            if right_motor.get_position() >= distance:
+            if self.robot.drive_system.right_motor.get_position() >= distance:
                 break
-        right_motor.turn_off()
-        left_motor.turn_off()
+        self.robot.drive_system.right_motor.turn_off()
+        self.robot.drive_system.left_motor.turn_off()
 
 def print_message_received(method_name, arguments=None):
     print()
