@@ -35,13 +35,12 @@ class MyRobotDelegate(object):
 
     def spin_left(self, speed, distance):
         print('spin left')
-        distance = distance * 4.572
         self.robot.drive_system.right_motor.turn_on()
         self.robot.drive_system.left_motor.turn_on()
         self.robot.drive_system.left_motor.reset_position()
         self.robot.drive_system.go(speed, -1 * speed)
         while True:
-            if self.robot.drive_system.right_motor.get_position() >= distance:
+            if self.robot.drive_system.right_motor.get_position() >= int(distance) * 4.572:
                 break
         self.robot.drive_system.right_motor.turn_off()
         self.robot.drive_system.left_motor.turn_off()
@@ -49,13 +48,12 @@ class MyRobotDelegate(object):
 
     def spin_right(self, speed, distance):
         print('spin right')
-        distance = distance * 4.572
         self.robot.drive_system.right_motor.turn_on()
         self.robot.drive_system.left_motor.turn_on()
         self.robot.drive_system.right_motor.reset_position()
         self.robot.drive_system.go(-1 * speed, speed)
         while True:
-            if self.robot.drive_system.right_motor.get_position() >= distance:
+            if self.robot.drive_system.right_motor.get_position() >= int(distance) * 4.572:
                 break
         self.robot.drive_system.right_motor.turn_off()
         self.robot.drive_system.left_motor.turn_off()
