@@ -64,13 +64,12 @@ class MyLaptopDelegate(object):
     # TODO: Add methods here as needed.
 
 
-
-
 # TODO: Add functions here as needed.
 def handle_spin_left(spin_left_entry, distance_entry, mqtt_sender):
     speed = int(spin_left_entry.get())
     distance = int(distance_entry.get())
     mqtt_sender.send("spin_left", [speed, distance])
+
 
 def handle_spin_right(spin_right_entry, distance_entry, mqtt_sender):
     speed = int(spin_right_entry.get())

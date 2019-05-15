@@ -34,29 +34,23 @@ class MyRobotDelegate(object):
     # TODO: Add methods here as needed.
 
     def spin_left(self, speed, distance):
-        print('spin left')
-        self.robot.drive_system.right_motor.turn_on()
-        self.robot.drive_system.left_motor.turn_on()
+        print_message_received('spin left', [speed, distance])
         self.robot.drive_system.left_motor.reset_position()
         self.robot.drive_system.go(speed, -1 * speed)
         while True:
-            if self.robot.drive_system.right_motor.get_position() >= int(distance) * 4.572:
+            if self.robot.drive_system.right_motor.get_position() >= distance * 4.572:
                 break
-        self.robot.drive_system.right_motor.turn_off()
-        self.robot.drive_system.left_motor.turn_off()
+        self.robot.drive_system.stop()
 
 
     def spin_right(self, speed, distance):
-        print('spin right')
-        self.robot.drive_system.right_motor.turn_on()
-        self.robot.drive_system.left_motor.turn_on()
+        print_message_received('spin right', [speed, distance])
         self.robot.drive_system.right_motor.reset_position()
         self.robot.drive_system.go(-1 * speed, speed)
         while True:
-            if self.robot.drive_system.right_motor.get_position() >= int(distance) * 4.572:
+            if self.robot.drive_system.right_motor.get_position() >= distance * 4.572:
                 break
-        self.robot.drive_system.right_motor.turn_off()
-        self.robot.drive_system.left_motor.turn_off()
+        self.robot.drive_system.stop()
 
 def print_message_received(method_name, arguments=None):
     print()
