@@ -34,6 +34,7 @@ class MyRobotDelegate(object):
     # TODO: Add methods here as needed.
 
     def spin_left(self, speed, distance):
+        print('spin left')
         distance = distance * 4.572
         self.robot.drive_system.right_motor.turn_on()
         self.robot.drive_system.left_motor.turn_on()
@@ -47,6 +48,7 @@ class MyRobotDelegate(object):
 
 
     def spin_right(self, speed, distance):
+        print('spin right')
         distance = distance * 4.572
         self.robot.drive_system.right_motor.turn_on()
         self.robot.drive_system.left_motor.turn_on()

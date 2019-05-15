@@ -41,7 +41,9 @@ def get_my_frame(root, window, mqtt_sender):
     distance_entry = ttk.Entry(frame)
     distance_entry.grid()
 
-    spin_left_button['command'] = lambda : handle_spin_left
+    spin_left_button['command'] = lambda : handle_spin_left(spin_left_entry, distance_entry, mqtt_sender)
+
+    spin_left_button['command'] = lambda: handle_spin_right(spin_right_entry, distance_entry, mqtt_sender)
     # Return your frame:
     return frame
 
@@ -62,15 +64,15 @@ class MyLaptopDelegate(object):
     # TODO: Add methods here as needed.
 
 
+
+
 # TODO: Add functions here as needed.
 def handle_spin_left(spin_left_entry, distance_entry, mqtt_sender):
-    print("spin_left")
     speed = int(spin_left_entry.get())
     distance = int(distance_entry.get())
     mqtt_sender.send("spin_left", [speed, distance])
 
 def handle_spin_right(spin_right_entry, distance_entry, mqtt_sender):
-    print("spin_left")
     speed = int(spin_right_entry.get())
     distance = int(distance_entry.get())
     mqtt_sender.send("spin_right", [speed, distance])
