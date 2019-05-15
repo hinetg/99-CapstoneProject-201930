@@ -38,19 +38,19 @@ class MyRobotDelegate(object):
         self.robot.drive_system.left_motor.reset_position()
         self.robot.drive_system.go(speed, -1 * speed)
         while True:
-            if self.robot.drive_system.right_motor.get_position() >= distance * 4.572:
+            if self.robot.drive_system.right_motor.get_position() >= distance * 4.572 * 1.1:
                 break
         self.robot.drive_system.stop()
-
 
     def spin_right(self, speed, distance):
         print_message_received('spin right', [speed, distance])
         self.robot.drive_system.right_motor.reset_position()
         self.robot.drive_system.go(-1 * speed, speed)
         while True:
-            if self.robot.drive_system.right_motor.get_position() >= distance * 4.572:
+            if self.robot.drive_system.right_motor.get_position() >= distance * 4.572 * 1.1 * (355 / 360):
                 break
         self.robot.drive_system.stop()
+
 
 def print_message_received(method_name, arguments=None):
     print()

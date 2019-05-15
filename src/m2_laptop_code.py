@@ -43,7 +43,7 @@ def get_my_frame(root, window, mqtt_sender):
 
     spin_left_button['command'] = lambda : handle_spin_left(spin_left_entry, distance_entry, mqtt_sender)
 
-    spin_left_button['command'] = lambda: handle_spin_right(spin_right_entry, distance_entry, mqtt_sender)
+    spin_right_button['command'] = lambda: handle_spin_right(spin_right_entry, distance_entry, mqtt_sender)
     # Return your frame:
     return frame
 
@@ -68,11 +68,11 @@ class MyLaptopDelegate(object):
 def handle_spin_left(spin_left_entry, distance_entry, mqtt_sender):
     speed = int(spin_left_entry.get())
     distance = int(distance_entry.get())
-    mqtt_sender.send("spin_left", [speed, distance])
+    mqtt_sender.send_message("spin_left", [speed, distance])
 
 
 def handle_spin_right(spin_right_entry, distance_entry, mqtt_sender):
     speed = int(spin_right_entry.get())
     distance = int(distance_entry.get())
-    mqtt_sender.send("spin_right", [speed, distance])
+    mqtt_sender.send_message("spin_right", [speed, distance])
 
