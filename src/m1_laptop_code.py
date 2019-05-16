@@ -25,7 +25,10 @@ def get_my_frame(root, window, mqtt_sender):
 
     # Add the rest of your GUI to your frame:
     # TODO: Put your GUI onto your frame (using sub-frames if you wish).
-    distance_entry_box = ttk.Entry(frame, width=8, )
+    move_until_button = ttk.Button(frame, text="Move Until")
+    move_until_button['command'] = lambda: move_until(speed_entry_box, distance_entry_box, mqtt_sender)
+    move_until_button.grid()
+    distance_entry_box = ttk.Entry(frame, width=8, text="Distance:")
     distance_entry_box.insert(0, "5")
     distance_entry_box.grid()
 
@@ -76,3 +79,9 @@ def move_backward(speed_entry_box2, distance_entry_box, mqtt_sender):
     speed = int(speed_entry_box2.get())
     dist = int(distance_entry_box.get())
     mqtt_sender.send_message("move_backward", [speed, dist])
+
+def move_until(speed_entry_box, distance_entry_box, mqtt_sender):
+    print("Move Until: ", distance_entry_box, " Inches, ", speed_entry_box)
+    speed = int(speed_entry_box.get())
+    dist = int(distance_entry_box.get())
+    mqtt_sender.send_message("move_until", [speed, dist])

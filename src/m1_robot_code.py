@@ -33,24 +33,37 @@ class MyRobotDelegate(object):
 
     # TODO: Add methods here as needed.
     def move_forward(self, speed, dist):
-        avg = 0
-        distance = dist
-        distanceMes = setDistance()
-        while distanceMes > distance:
+        self.robot.drive_system.left_motor.reset_position()
+        self.robot.drive_system.right_motor.reset_position()
+        position = 0
+        val = dist * 80
+        while position < val:
             self.go(speed, speed)
-            avg = takeAvg()
-            distanceMes = avg
+            position = self.robot.drive_system.left_motor.get_position()
+            print(position)
         self.robot.drive_system.stop()
 
     def move_backward(self, speed, dist):
+        self.robot.drive_system.left_motor.reset_position()
+        self.robot.drive_system.right_motor.reset_position()
+        position = 0
+        val = -dist * 80
+        while position > val:
+            self.go(-speed, -speed)
+            position = self.robot.drive_system.left_motor.get_position()
+        self.robot.drive_system.stop()
+
+    def move_until(self, speed, dist):
         avg = 0
         distance = dist
-        distanceMes = setDistance()
-        while distanceMes < distance:
-            self.go(-speed, -speed)
+        distance_measure = setDistance()
+        while distance_measure > distance:
+            self.go(speed, speed)
             avg = takeAvg()
-            distanceMes = avg
+            distance_measure = avg
         self.robot.drive_system.stop()
+        avg = 0
+        distance = dist
 
 
 def print_message_received(method_name, arguments):
