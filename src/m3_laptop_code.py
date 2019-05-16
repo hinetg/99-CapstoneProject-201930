@@ -26,7 +26,7 @@ def get_my_frame(root, window, mqtt_sender):
     # DONE 2: Put your name in the above.
 
     # Add the rest of your GUI to your frame:
-    # TODO: Put your GUI onto your frame (using sub-frames if you wish).
+    # DONE: Put your GUI onto your frame (using sub-frames if you wish).
     speed_entry_box = ttk.Entry(frame, width=8)
     speed_entry_box.insert(0, "100")
     arm_calibrate_button = ttk.Button(frame, text="Calibrate Arm")
@@ -77,10 +77,10 @@ class MyLaptopDelegate(object):
     def set_mqtt_sender(self, mqtt_sender):
         self.mqtt_sender = mqtt_sender
 
-    # TODO: Add methods here as needed.
+    # DONE: Add methods here as needed.
 
 
-# TODO: Add functions here as needed.
+# DONE: Add functions here as needed.
 def handle_arm_up(speed_entry_box, mqtt_sender):
     print("handle arm up:", speed_entry_box.get())
     speed = int(speed_entry_box.get())
