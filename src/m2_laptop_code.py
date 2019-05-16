@@ -29,8 +29,8 @@ def get_my_frame(root, window, mqtt_sender):
     spin_left_button = ttk.Button(frame, text='Spin Left')
     spin_left_button.grid()
 
-    spin_left_entry = ttk.Entry(frame)
-    spin_left_entry.grid()
+    spin = ttk.Entry(frame)
+    spin.grid()
 
     spin_right_button = ttk.Button(frame, text='Spin Right')
     spin_right_button.grid()
@@ -38,12 +38,46 @@ def get_my_frame(root, window, mqtt_sender):
     spin_right_entry = ttk.Entry(frame)
     spin_right_entry.grid()
 
+    distance_label = ttk.Label(frame, text="Distance (in degrees)")
+    distance_label.grid()
+
     distance_entry = ttk.Entry(frame)
     distance_entry.grid()
 
-    spin_left_button['command'] = lambda : handle_spin_left(spin_left_entry, distance_entry, mqtt_sender)
+    spin_until_facing_button = ttk.Button(frame, text='Spin Until Facing')
+    spin_until_facing_button.grid()
 
-    spin_right_button['command'] = lambda: handle_spin_right(spin_right_entry, distance_entry, mqtt_sender)
+    color = ttk.Label(frame, text='Color')
+    color.grid()
+
+    signature = ttk.Entry(frame)
+    signature.grid()
+
+    area_label = ttk.Label(frame, text="Area")
+    area_label.grid()
+
+    area = ttk.Entry(frame)
+    area.grid()
+
+    x_label = ttk.Label(frame, text='x-value')
+    x_label.grid()
+
+    x = ttk.Entry(frame)
+    x.grid()
+
+    delta_label = ttk.Label(frame, text='Delta')
+    delta_label.grid()
+
+    delta = ttk.Entry(frame)
+    delta.grid()
+
+    spin_left_button['command'] = lambda : handle_spin_left(spin, distance_entry, mqtt_sender)
+
+    spin_right_button['command'] = lambda: handle_spin_right(spin, distance_entry, mqtt_sender)
+
+    spin_until_facing_button['command'] = lambda:\
+        handle_spin_until_facing(str(signature.get()), x.get(), delta.get(), int(spin.get()), area.get())
+
     # Return your frame:
     return frame
 
@@ -76,3 +110,6 @@ def handle_spin_right(spin_right_entry, distance_entry, mqtt_sender):
     distance = int(distance_entry.get())
     mqtt_sender.send_message("spin_right", [speed, distance])
 
+
+def handle_spin_until_facing(signature, X, delta, speed, big_enough, mqtt_sender):
+    mqtt_sender.send_message("spin_until_facing", [signature, X, delta, speed, big_enough])

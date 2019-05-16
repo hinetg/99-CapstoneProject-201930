@@ -10,7 +10,7 @@ import mqtt_remote_method_calls as mqtt
 import rosebot
 import m2_robot_code as m2
 import m3_robot_code as m3
-
+import time
 
 class MyRobotDelegate(object):
     """
@@ -49,6 +49,25 @@ class MyRobotDelegate(object):
         while True:
             if self.robot.drive_system.left_motor.get_position() >= distance * 4.572 * 1.1 * (355 / 360):
                 break
+        self.robot.drive_system.stop()
+
+    def spin_until_facing(self, color, X, delta, speed, area):
+        camera = rosebot.Camera()
+        self.robot.drive_system.go(speed, -1 * speed)
+        while True:
+            target = camera.get_biggest_blob()
+            if target.get_area() >= area:
+                color_sensor = rosebot.ColorSensor(target)
+                if color_sensor.get_color_as_name() == color:
+                    while True:
+                        if abs(target.center.x) + delta <= X:
+                            break
+                        else:
+                            if not target.center.x <= X:
+                                self.robot.drive_system.stop()
+                                self.spin_until_facing(color, X, delta, -1 * speed, area)
+                                break
+            break
         self.robot.drive_system.stop()
 
 
