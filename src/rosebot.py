@@ -80,7 +80,6 @@ class DriveSystem(object):
     # -------------------------------------------------------------------------
     # Methods for making the robot move.
     # -------------------------------------------------------------------------
-
     def go(self, left_wheel_speed, right_wheel_speed):
         """ Makes the left and right wheel motors spin at the given speeds. """
         self.left_motor.turn_on(left_wheel_speed)
@@ -90,7 +89,6 @@ class DriveSystem(object):
         """ Stops the left and right wheel motors. """
         self.left_motor.turn_off()
         self.right_motor.turn_off()
-
 
 ###############################################################################
 #    ArmAndClaw
