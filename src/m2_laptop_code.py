@@ -35,9 +35,6 @@ def get_my_frame(root, window, mqtt_sender):
     spin_right_button = ttk.Button(frame, text='Spin Right')
     spin_right_button.grid()
 
-    spin_right_entry = ttk.Entry(frame)
-    spin_right_entry.grid()
-
     distance_label = ttk.Label(frame, text="Distance (in degrees)")
     distance_label.grid()
 
@@ -76,7 +73,7 @@ def get_my_frame(root, window, mqtt_sender):
     spin_right_button['command'] = lambda: handle_spin_right(spin, distance_entry, mqtt_sender)
 
     spin_until_facing_button['command'] = lambda:\
-        handle_spin_until_facing(str(signature.get()), x.get(), delta.get(), int(spin.get()), area.get())
+        handle_spin_until_facing(str(signature.get()), int(x.get()), int(delta.get()), int(spin.get()), int(area.get()), mqtt_sender)
 
     # Return your frame:
     return frame

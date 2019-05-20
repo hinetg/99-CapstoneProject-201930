@@ -51,24 +51,29 @@ class MyRobotDelegate(object):
                 break
         self.robot.drive_system.stop()
 
-    def spin_until_facing(self, color, X, delta, speed, area):
-        camera = rosebot.Camera()
+    def spin_until_facing(self, color, x, delta, speed, area):
+        sensor = rosebot.SensorSystem()
+        camera = sensor.camera
+        color_sensor = sensor.color_sensor
         self.robot.drive_system.go(speed, -1 * speed)
         while True:
+            print('searching for targets...')
             target = camera.get_biggest_blob()
             if target.get_area() >= area:
-                color_sensor = rosebot.ColorSensor(target)
+                print('target acquired.')
                 if color_sensor.get_color_as_name() == color:
+                    print('correct color found.')
                     while True:
-                        if abs(target.center.x) + delta <= X:
+                        if abs(target.center.x) + delta >= abs(x):
                             break
                         else:
-                            if not target.center.x <= X:
+                            if not target.center.x <= x:
                                 self.robot.drive_system.stop()
-                                self.spin_until_facing(color, X, delta, -1 * speed, area)
+                                self.spin_until_facing(color, x, delta, -1 * speed, area)
                                 break
-            break
+                break
         self.robot.drive_system.stop()
+        print('program completed successfully.')
 
 
 def print_message_received(method_name, arguments=None):
