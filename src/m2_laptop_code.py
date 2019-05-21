@@ -109,4 +109,4 @@ def handle_spin_right(spin_right_entry, distance_entry, mqtt_sender):
 
 
 def handle_spin_until_facing(signature, X, delta, speed, big_enough, mqtt_sender):
-    mqtt_sender.send_message("spin_until_facing", [signature, X, delta, speed, big_enough])
+    mqtt_sender.send_message("spin_until_facing", [signature, X + 160, delta, speed, big_enough])
